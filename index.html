@@ -777,7 +777,7 @@ async function sendChat(){
   renderChatHistory();
   try{
     const res=await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',headers:{'Content-Type':'application/json'},
+      method:'POST',headers:{'Content-Type':'application/json','x-api-key':'YOUR_KEY_HERE','anthropic-version':'2023-06-01'},
       body:JSON.stringify({
         model:'claude-sonnet-4-20250514',max_tokens:1000,
         system:`You are a smart, friendly AI business advisor for a small shop called "${shopName}" in an emerging market. Give short, practical, plain-English advice. Current inventory: ${invSummary}. Recent sales: ${saleSummary}. 7-day sales (Mon-Sun): ${weekSales} ${CUR()}. Currency: ${CUR()}. Be concise — 2-4 sentences max. Never mention being an AI or Claude.`,
@@ -816,7 +816,7 @@ async function handleReceiptUpload(event){
     const mediaType=file.type||'image/jpeg';
     try{
       const res=await fetch('https://api.anthropic.com/v1/messages',{
-        method:'POST',headers:{'Content-Type':'application/json'},
+       method:'POST',headers:{'Content-Type':'application/json','x-api-key':'YOUR_KEY_HERE','anthropic-version':'2023-06-01'},
         body:JSON.stringify({
           model:'claude-sonnet-4-20250514',max_tokens:1000,
           system:'You are a receipt and records reader. Extract product names, quantities, and prices from the image. Respond ONLY with a JSON array like: [{"name":"Product","qty":10,"buyPrice":50,"sellPrice":70}]. If sell price is not shown, estimate 20% above buy price. Numbers only, no currency symbols.',
